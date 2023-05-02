@@ -32,6 +32,8 @@ class ISOLATEDSYSTEM_API ACharacter_Survivor : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACharacter_Survivor();
+	virtual void Jump() override;
+	virtual void DoCrouch();
 
 protected:
 	// Called when the game starts or when spawned
@@ -45,6 +47,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* LookAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* JumpAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* CrouchAction;
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);

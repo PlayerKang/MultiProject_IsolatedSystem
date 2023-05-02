@@ -18,7 +18,7 @@ ACharacter_Survivor::ACharacter_Survivor()
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
@@ -29,12 +29,19 @@ ACharacter_Survivor::ACharacter_Survivor()
 	GetCharacterMovement()->MaxWalkSpeed = 500.f;
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
-
+	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
+
+void ACharacter_Survivor::DoCrouch()
+{
+	UE_LOG(LogClass, Warning, TEXT("DoCrouch"));
+	CanCrouch() ? Crouch() : UnCrouch();
+}
+
 
 // Called when the game starts or when spawned
 void ACharacter_Survivor::BeginPlay()
@@ -64,7 +71,7 @@ void ACharacter_Survivor::Move(const FInputActionValue& Value)
 	const FRotator Rotation = Controller->GetControlRotation();
 	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
-	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 	AddMovementInput(ForwardDirection, MovementVector.Y);
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	AddMovementInput(RightDirection, MovementVector.X);
@@ -94,6 +101,8 @@ void ACharacter_Survivor::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	{
 		EnhancedInputComponent->BindAction(MovementAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Look);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Jump);
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::DoCrouch);
 	}
 
 }
