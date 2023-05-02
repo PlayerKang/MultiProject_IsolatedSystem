@@ -53,6 +53,7 @@ void ACharacter_Survivor::BeginPlay()
 
 void ACharacter_Survivor::Move(const FInputActionValue& Value)
 {
+
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 
 	/*const FVector Forward = GetActorForwardVector();
@@ -67,6 +68,14 @@ void ACharacter_Survivor::Move(const FInputActionValue& Value)
 	AddMovementInput(ForwardDirection, MovementVector.Y);
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	AddMovementInput(RightDirection, MovementVector.X);
+}
+
+void ACharacter_Survivor::Look(const FInputActionValue& Value)
+{
+	const FVector2D LookAxisVector = Value.Get<FVector2D>();
+
+	AddControllerPitchInput(LookAxisVector.Y);
+	AddControllerYawInput(LookAxisVector.X);
 }
 
 // Called every frame
@@ -84,6 +93,7 @@ void ACharacter_Survivor::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MovementAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Move);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Look);
 	}
 
 }

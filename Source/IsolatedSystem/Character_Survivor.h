@@ -27,6 +27,8 @@ class ISOLATEDSYSTEM_API ACharacter_Survivor : public ACharacter
 	class UCameraComponent* FollowCamera;
 
 
+
+
 public:
 	// Sets default values for this character's properties
 	ACharacter_Survivor();
@@ -41,7 +43,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* MovementAction;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* LookAction;
+
 	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 
 public:	
 	// Called every frame
