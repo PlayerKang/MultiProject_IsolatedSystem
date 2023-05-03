@@ -32,7 +32,6 @@ class ISOLATEDSYSTEM_API ACharacter_Survivor : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACharacter_Survivor();
-	virtual void Jump() override;
 	virtual void DoCrouch();
 
 protected:
@@ -56,6 +55,7 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	void Jump(const FInputActionValue& Value);
 
 public:	
 	// Called every frame
