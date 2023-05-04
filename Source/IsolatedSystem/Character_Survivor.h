@@ -18,13 +18,12 @@ class ISOLATEDSYSTEM_API ACharacter_Survivor : public ACharacter
 	GENERATED_BODY()
 
 
-	/** Camera boom positioning the camera behind the character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	//class USpringArmComponent* CameraBoom;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	//class UCameraComponent* FollowCamera;
 
-	/** Follow camera */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FollowCamera;
+	
 
 
 
@@ -32,11 +31,21 @@ class ISOLATEDSYSTEM_API ACharacter_Survivor : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACharacter_Survivor();
-	virtual void DoCrouch();
+	void DoCrouch();
+	bool Crouched = false;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+	UCameraComponent* FPSCameraComponent;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	USkeletalMeshComponent* FPSMesh;
+
+
 
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputMappingContext* SurvivorContext;
@@ -64,11 +73,5 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-
-public:
-	/** Returns CameraBoom subobject **/
-	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
-	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 };

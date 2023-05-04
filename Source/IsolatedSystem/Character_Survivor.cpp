@@ -18,12 +18,11 @@ ACharacter_Survivor::ACharacter_Survivor()
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
 
 	GetCharacterMovement()->bOrientRotationToMovement = false; // Character moves in the direction of input...	
 	//GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
-
 	/*GetCharacterMovement()->JumpZVelocity = 400.f;
 	GetCharacterMovement()->AirControl = 0.35f;
 	GetCharacterMovement()->MaxWalkSpeed = 500.f;
@@ -32,6 +31,19 @@ ACharacter_Survivor::ACharacter_Survivor()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;*/
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
+	FPSCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
+	FPSCameraComponent->SetupAttachment(GetCapsuleComponent());
+	FPSCameraComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 50.0f + BaseEyeHeight));
+	FPSCameraComponent->bUsePawnControlRotation = true;
+
+	FPSMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonMesh"));
+	FPSMesh->SetOnlyOwnerSee(true);
+	FPSMesh->SetupAttachment(FPSCameraComponent);
+	FPSMesh->bCastDynamicShadow = false;
+	FPSMesh->CastShadow = false;
+	GetMesh()->SetOwnerNoSee(true);
+
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -39,10 +51,8 @@ ACharacter_Survivor::ACharacter_Survivor()
 
 void ACharacter_Survivor::DoCrouch()
 {
-	UE_LOG(LogClass, Warning, TEXT("DoCrouch"));
-	CanCrouch() ? Crouch() : UnCrouch();
+	Crouch();
 }
-
 
 // Called when the game starts or when spawned
 void ACharacter_Survivor::BeginPlay()
