@@ -51,7 +51,14 @@ ACharacter_Survivor::ACharacter_Survivor()
 
 void ACharacter_Survivor::DoCrouch()
 {
-	Crouch();
+	if (CanCrouch())
+	{
+		Crouch();
+	}
+	else {
+		UnCrouch();
+	}
+	
 }
 
 // Called when the game starts or when spawned
