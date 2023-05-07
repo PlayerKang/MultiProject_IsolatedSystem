@@ -33,7 +33,7 @@ ACharacter_Survivor::ACharacter_Survivor()
 
 	FPSCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FPSCameraComponent->SetupAttachment(GetCapsuleComponent());
-	FPSCameraComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 50.0f + BaseEyeHeight));
+	FPSCameraComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f + BaseEyeHeight));
 	FPSCameraComponent->bUsePawnControlRotation = true;
 
 	FPSMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonMesh"));
@@ -51,14 +51,7 @@ ACharacter_Survivor::ACharacter_Survivor()
 
 void ACharacter_Survivor::DoCrouch()
 {
-	if (CanCrouch())
-	{
-		Crouch();
-	}
-	else {
-		UnCrouch();
-	}
-	
+	CanCrouch() ? Crouch() : UnCrouch();
 }
 
 // Called when the game starts or when spawned
