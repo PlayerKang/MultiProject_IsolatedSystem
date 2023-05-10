@@ -13,6 +13,9 @@ UCLASS()
 class ISOLATEDSYSTEM_API APlayerState_Survivor : public APlayerState
 {
 	GENERATED_BODY()
+		
+public:
+	int HP;
 
 	
 };
