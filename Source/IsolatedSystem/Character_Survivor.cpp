@@ -49,11 +49,6 @@ ACharacter_Survivor::ACharacter_Survivor()
 
 }
 
-void ACharacter_Survivor::DoCrouch()
-{
-	CanCrouch() ? Crouch() : UnCrouch();
-}
-
 // Called when the game starts or when spawned
 void ACharacter_Survivor::BeginPlay()
 {
@@ -118,7 +113,6 @@ void ACharacter_Survivor::SetupPlayerInputComponent(UInputComponent* PlayerInput
 		EnhancedInputComponent->BindAction(MovementAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Look);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::Jump);
-		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &ACharacter_Survivor::DoCrouch);
 	}
 
 }
