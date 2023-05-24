@@ -46,7 +46,7 @@ float AABCharacterNonPlayer::GetAIDetectRange()
 
 float AABCharacterNonPlayer::GetAIAttackRadius()
 {
-	// 폰과 폰사이의 거리 = 공격범위 + (공격반지름 * 2)
+	// 폰과 폰사이의 거리 = 공격범위 + (공격반지름 50.0f * 2)
 	//return Stat->GetTotalStat().AttackRange + Stat->GetAttackRadius() * 2;
 	return 30.0f;
 }
@@ -58,9 +58,11 @@ float AABCharacterNonPlayer::GetAITurnSpeed()
 
 void AABCharacterNonPlayer::SetAIAttackDelegate(const FAICharacterAttackFinished& InOnAttackFinished)
 {
+	OnAttackFinished = InOnAttackFinished;
 }
 
 void AABCharacterNonPlayer::AttackByAI()
 {
+	// 공격 함수 필요..
 }
 
