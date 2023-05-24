@@ -37,6 +37,7 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 	// 월드 값 못 가져올 때 예외처리
 	if (nullptr == World)
 	{
+
 		return;
 	}
 
