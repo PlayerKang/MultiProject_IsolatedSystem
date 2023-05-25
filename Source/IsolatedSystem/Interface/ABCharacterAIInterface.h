@@ -7,7 +7,7 @@
 #include "ABCharacterAIInterface.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(Blueprintable)
 class UABCharacterAIInterface : public UInterface
 {
 	GENERATED_BODY()
@@ -23,11 +23,13 @@ class ISOLATEDSYSTEM_API IABCharacterAIInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	
 	virtual float GetAIPatrolRadius() = 0;
 	virtual float GetAIDetectRange() = 0;
-	virtual float GetAIAttackRadius() = 0;
+	virtual float GetAIAttackRange() = 0;
 	virtual float GetAITurnSpeed() = 0;
 
 	virtual void SetAIAttackDelegate(const FAICharacterAttackFinished& InOnAttackFinished) = 0;
 	virtual void AttackByAI() = 0;
+	
 };

@@ -12,6 +12,8 @@ public class IsolatedSystem : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
+		PrivateIncludePaths.AddRange(new string[] { "IsolatedSystem/Interface", "IsolatedSystem/AI", "IsolatedSystem/Animation", "IsolatedSystem/Physics", "IsolatedSystem/Stat"});
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		

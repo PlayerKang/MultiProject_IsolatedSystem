@@ -6,6 +6,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "GameStateBase_Main.generated.h"
 
+
 /**
  * 
  */
@@ -14,4 +15,5 @@ class ISOLATEDSYSTEM_API AGameStateBase_Main : public AGameStateBase
 {
 	GENERATED_BODY()
 	
+
 };
