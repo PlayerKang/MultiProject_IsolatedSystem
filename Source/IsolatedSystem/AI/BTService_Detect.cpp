@@ -74,7 +74,19 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 
 			// 폰을 조정하는게 플레이어 컨트롤러인 경우 
 			// 즉, 플레이어 감지하는 디버그 그려주는 내용
-			if (Pawn && Pawn->GetController()->IsPlayerController())
+			if (Pawn == nullptr)
+			{
+				UE_LOG(LogTemp, Log, TEXT("Pawn is nullptr(wontae)"));
+				return;
+			}
+
+			if (Pawn->GetController() == nullptr)
+			{
+				UE_LOG(LogTemp, Log, TEXT("Pawn Controller is nullptr(wontae)"));
+				return;
+			}
+
+			if (Pawn->GetController()->IsPlayerController())
 			{
 				// 블랙보드에 타겟값(플레이어) 저장
 				OwnerComp.GetBlackboardComponent()->SetValueAsObject(BBKEY_TARGET, Pawn);

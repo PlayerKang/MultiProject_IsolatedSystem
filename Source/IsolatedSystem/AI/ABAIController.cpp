@@ -18,7 +18,7 @@ AABAIController::AABAIController()
 	} 
 
 	static ConstructorHelpers::FObjectFinder<UBehaviorTree> BTAssetRef
-	(TEXT("/Script/AIModule.BehaviorTree'/Game/WorkByKim/AI/BT_NPC.BT_NPC'"));
+	(TEXT("/Script/AIModule.BehaviorTree'/Game/WorkByKim/AI/NPC/BT_NPC.BT_NPC'"));
 	if (nullptr != BTAssetRef.Object)
 	{
 		BTAsset = BTAssetRef.Object;
