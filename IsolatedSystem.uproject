@@ -40,6 +40,10 @@
 				"Android",
 				"HoloLens"
 			]
+		},
+		{
+			"Name": "GameFeatures",
+			"Enabled": true
 		}
 	]
 }
